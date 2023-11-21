@@ -1,5 +1,5 @@
 {
-  "name": "unit-conversion",
+  "name": "@godcount/unit-conversion",
   "version": "1.0.0",
   "description": "通用单位换算工具库",
   "main": "./lib/index.cjs.js",
