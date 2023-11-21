@@ -9,7 +9,7 @@
 
 
 ``` bash
-npm install @god-count/unit-conversion
+npm install @godcount/unit-conversion
 ```
 
 ## 用法
@@ -21,13 +21,13 @@ npm install @god-count/unit-conversion
 - 导入全部
 
 ``` js
-    import "@god-count/unit-conversion"
+    import "@godcount/unit-conversion"
 ```
 
 - 使用类
 
 ``` js
-    import { DurationUnit } from "@god-count/unit-conversion"
+    import { DurationUnit } from "@godcount/unit-conversion"
 ``` 
 
 # 使用例子

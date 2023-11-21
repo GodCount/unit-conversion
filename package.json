@@ -2,20 +2,37 @@
   "name": "unit-conversion",
   "version": "1.0.0",
   "description": "通用单位换算工具库",
-  "main": "./lib/index.esm.js",
+  "main": "./lib/index.cjs.js",
+  "module": "./lib/index.esm.js",
+  "browser": "./lib/index.umd.js",
   "type": "module",
   "types": "/lib/index.d.ts",
   "license": "MIT",
+  "author": {
+    "name": "GodCount",
+    "email": "do_yzr@163.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GodCount/unit-conversion.git"
+  },
   "scripts": {
-    "clear": "rm -rf lib/",
-    "build": "npm run clear && rollup -c",
+    "dev": "cross-env NODE_ENV=development rollup -c rollup.config.js",
+    "build": "cross-env NODE_ENV=production yarn run test && rollup -c rollup.config.js",
     "test": "jest"
   },
+  "files": [
+    "lib/*.js",
+    "lib/*.d.ts"
+  ],
   "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.5",
     "@types/jest": "^29.5.9",
+    "cross-env": "^7.0.3",
     "esbuild": "^0.19.6",
     "esbuild-jest": "^0.5.0",
+    "fs-extra": "^11.1.1",
     "jest": "^29.7.0",
     "rollup": "^4.5.0",
     "rollup-plugin-dts": "^6.1.0",
