@@ -2,6 +2,20 @@ import Unit from "../unit";
 
 export declare type DurationUnitType = "ms" | "s" | "min" | "h" | "d";
 
+const MS_PER_S = 1000;
+const S_PER_MIN = MS_PER_S * 60;
+const MIN_PER_H = S_PER_MIN * 60;
+const H_PER_D = MIN_PER_H * 24;
+
+const UNIT_TABLE = {
+    "ms": 1,
+    "s": MS_PER_S,
+    "min": S_PER_MIN,
+    "h": MIN_PER_H,
+    "d": H_PER_D
+}
+
+
 export class DurationUnit extends Unit<DurationUnitType> {
 
     private minValue: number;
@@ -14,39 +28,9 @@ export class DurationUnit extends Unit<DurationUnitType> {
 
     public static convert(value: number, source: DurationUnitType, target: DurationUnitType) {
         if (source == target) return value;
-        let ms = NaN;
-        switch (source) {
-            case "ms":
-                ms = value;
-                break;
-            case "s":
-                ms = value * 1000;
-                break;
-            case "min":
-                ms = value * 60 * 1000;
-                break;
-            case "h":
-                ms = value * 60 * 60 * 1000;
-                break;
-            case "d":
-                ms = value * 24 * 60 * 60 * 1000;
-                break;
-        }
+        const ms = value * UNIT_TABLE[source];
         if (isNaN(ms)) throw Error("DurationUnit value cannot be NaN!");
-        switch (target) {
-            case "ms":
-                return ms;
-            case "s":
-                return ms / 1000;
-            case "min":
-                return ms / 60 / 1000;
-            case "h":
-                return ms / 60 / 60 / 1000;
-            case "d":
-                return ms / 24 / 60 / 60 / 1000;
-            default:
-                throw Error("No such unit " + target);
-        }
+        return ms / UNIT_TABLE[target];
     }
 
     get ms() {

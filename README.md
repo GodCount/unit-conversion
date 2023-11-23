@@ -30,6 +30,16 @@ npm install @godcount/unit-conversion
     import { DurationUnit } from "@godcount/unit-conversion"
 ``` 
 
+- （typescript）全局类型提示
+``` json
+    // tsconfig.json
+    {
+        "compilerOptions" : {
+            "types": ["@godcount/unit-conversion"]
+        }
+    }
+``` 
+
 # 使用例子
 
 ## 转换时间
