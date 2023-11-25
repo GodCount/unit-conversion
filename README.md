@@ -1,44 +1,45 @@
 # unit-conversion
 
-- 快捷的单位转换工具,对Number原型扩展,实现快速使用
+- 快捷的单位转换工具,对 Number 原型扩展,实现快速使用
 
 ## 日志
- 
- - 实现时间,存储容量,单位转换
 
+- 时间
+- 存储容量
+- 长度（公制、市制、英制）
 
-
-``` bash
+```bash
 npm install @godcount/unit-conversion
 ```
 
 ## 用法
 
- - 只需要全局导入
+- 只需要全局导入
 
 ### 导入例子
 
 - 导入全部
 
-``` js
-    import "@godcount/unit-conversion"
+```js
+import "@godcount/unit-conversion";
 ```
 
 - 使用类
 
-``` js
-    import { DurationUnit } from "@godcount/unit-conversion"
-``` 
+```js
+import { DurationUnit } from "@godcount/unit-conversion";
+```
 
 - （typescript）全局类型提示
-``` json
-    // tsconfig.json
-    {
-        "compilerOptions" : {
-            "types": ["@godcount/unit-conversion"]
-        }
-    }
-``` 
+
+```json
+// tsconfig.json
+{
+  "compilerOptions": {
+    "types": ["@godcount/unit-conversion"]
+  }
+}
+```
 
 # 使用例子
 
@@ -46,7 +47,7 @@ npm install @godcount/unit-conversion
 
 - 返回毫秒
 
-``` js
+```js
 
 const duration = 180;
 duration.toDuration("s").ms;
@@ -61,5 +62,15 @@ duration.toDuration("s").min;
 ```js
 const byte = 1024;
 byte.toStorage("byte").m;
+```
 
+## 转换长度
+
+- 返回厘米、毫、码
+
+```js
+const nm = 100;
+nm.toLength("nm")
+    .cm.toLength("cm")
+    .hao.toLength("hao").yd;
 ```
