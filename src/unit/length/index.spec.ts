@@ -1,60 +1,55 @@
 import { LengthUnit } from ".";
 
 describe("Length Unit Convert", function () {
-
-
     test("Metric Unit Convert", function () {
-        expect(LengthUnit.metricConvert(1, "pm", "nm")).toBe(0.001);
-        expect(LengthUnit.metricConvert(1, "pm", "um")).toBe(0.000001);
-        expect(LengthUnit.metricConvert(1, "pm", "mm")).toBe(0.000000001);
-        expect(LengthUnit.metricConvert(1, "pm", "cm")).toBe(0.0000000001);
-        expect(LengthUnit.metricConvert(1, "pm", "dm")).toBe(0.00000000001);
-        expect(LengthUnit.metricConvert(1, "pm", "m")).toBe(0.000000000001);
-        expect(LengthUnit.metricConvert(1, "pm", "km")).toBe(0.000000000000001);
+        expect(LengthUnit.convert(1, "pm", "nm")).toBe(0.001);
+        expect(LengthUnit.convert(1, "pm", "um")).toBe(0.000001);
+        expect(LengthUnit.convert(1, "pm", "mm")).toBe(0.000000001);
+        expect(LengthUnit.convert(1, "pm", "cm")).toBe(0.0000000001);
+        expect(LengthUnit.convert(1, "pm", "dm")).toBe(0.00000000001);
+        expect(LengthUnit.convert(1, "pm", "m")).toBe(0.000000000001);
+        expect(LengthUnit.convert(1, "pm", "km")).toBe(0.000000000000001);
 
-        expect(LengthUnit.metricConvert(1, "nm", "pm")).toBe(1000);
-        expect(LengthUnit.metricConvert(1, "um", "pm")).toBe(1000000);
-        expect(LengthUnit.metricConvert(1, "mm", "pm")).toBe(1000000000);
-        expect(LengthUnit.metricConvert(1, "cm", "pm")).toBe(10000000000);
-        expect(LengthUnit.metricConvert(1, "dm", "pm")).toBe(100000000000);
-        expect(LengthUnit.metricConvert(1, "m", "pm")).toBe(1000000000000);
-        expect(LengthUnit.metricConvert(1, "km", "pm")).toBe(1000000000000000);
+        expect(LengthUnit.convert(1, "nm", "pm")).toBe(1000);
+        expect(LengthUnit.convert(1, "um", "pm")).toBe(1000000);
+        expect(LengthUnit.convert(1, "mm", "pm")).toBe(1000000000);
+        expect(LengthUnit.convert(1, "cm", "pm")).toBe(10000000000);
+        expect(LengthUnit.convert(1, "dm", "pm")).toBe(100000000000);
+        expect(LengthUnit.convert(1, "m", "pm")).toBe(1000000000000);
+        expect(LengthUnit.convert(1, "km", "pm")).toBe(1000000000000000);
     });
-
 
     test("Chinese Unit Convert", function () {
-        expect(LengthUnit.chineseConvert(1, "hao", "lii")).toBe(0.1);
-        expect(LengthUnit.chineseConvert(1, "hao", "fen")).toBe(0.01);
-        expect(LengthUnit.chineseConvert(1, "hao", "cun")).toBe(0.001);
-        expect(LengthUnit.chineseConvert(1, "hao", "chi")).toBe(0.0001);
-        expect(LengthUnit.chineseConvert(1, "hao", "zhang")).toBe(0.00001);
-        expect(LengthUnit.chineseConvert(1, "hao", "li").toFixed(9)).toBe("0.000000067");
-        expect(LengthUnit.chineseConvert(1, "hao", "gongli").toFixed(9)).toBe("0.000000033");
+        expect(LengthUnit.convert(1, "hao", "lii")).toBe(0.1);
+        expect(LengthUnit.convert(1, "hao", "fen")).toBe(0.01);
+        expect(LengthUnit.convert(1, "hao", "cun")).toBe(0.001);
+        expect(LengthUnit.convert(1, "hao", "chi")).toBe(0.0001);
+        expect(LengthUnit.convert(1, "hao", "zhang")).toBe(0.00001);
+        expect(LengthUnit.convert(1, "hao", "li").toFixed(9)).toBe("0.000000067");
+        expect(LengthUnit.convert(1, "hao", "gongli").toFixed(9)).toBe("0.000000033");
 
-        expect(LengthUnit.chineseConvert(1, "lii", "hao")).toBe(10);
-        expect(LengthUnit.chineseConvert(1, "fen", "hao")).toBe(100);
-        expect(LengthUnit.chineseConvert(1, "cun", "hao")).toBe(1000);
-        expect(LengthUnit.chineseConvert(1, "chi", "hao")).toBe(10000);
-        expect(LengthUnit.chineseConvert(1, "zhang", "hao")).toBe(100000);
-        expect(LengthUnit.chineseConvert(1, "li", "hao")).toBe(15000000);
-        expect(LengthUnit.chineseConvert(1, "gongli", "hao")).toBe(30000000);
+        expect(LengthUnit.convert(1, "lii", "hao")).toBe(10);
+        expect(LengthUnit.convert(1, "fen", "hao")).toBe(100);
+        expect(LengthUnit.convert(1, "cun", "hao")).toBe(1000);
+        expect(LengthUnit.convert(1, "chi", "hao")).toBe(10000);
+        expect(LengthUnit.convert(1, "zhang", "hao")).toBe(100000);
+        expect(LengthUnit.convert(1, "li", "hao")).toBe(15000000);
+        expect(LengthUnit.convert(1, "gongli", "hao")).toBe(30000000);
     });
-
 
     test("British Unit Convert", function () {
-        expect(LengthUnit.britishConvert(1, "in", "ft").toFixed(4)).toBe("0.0833");
-        expect(LengthUnit.britishConvert(1, "in", "yd").toFixed(4)).toBe("0.0278");
-        expect(LengthUnit.britishConvert(1, "in", "ftm").toFixed(4)).toBe("0.0139");
-        expect(LengthUnit.britishConvert(1, "in", "fur").toFixed(5)).toBe("0.00013");
-        expect(LengthUnit.britishConvert(1, "in", "mi").toFixed(6)).toBe("0.000016");
+        expect(LengthUnit.convert(1, "in", "ft").toFixed(4)).toBe("0.0833");
+        expect(LengthUnit.convert(1, "in", "yd").toFixed(4)).toBe("0.0278");
+        expect(LengthUnit.convert(1, "in", "ftm").toFixed(4)).toBe("0.0139");
+        expect(LengthUnit.convert(1, "in", "fur").toFixed(5)).toBe("0.00013");
+        expect(LengthUnit.convert(1, "in", "mi").toFixed(6)).toBe("0.000016");
 
-        expect(LengthUnit.britishConvert(1, "ft", "in")).toBe(12);
-        expect(LengthUnit.britishConvert(1, "yd", "in")).toBe(36);
-        expect(LengthUnit.britishConvert(1, "ftm", "in")).toBe(72);
-        expect(LengthUnit.britishConvert(1, "fur", "in")).toBe(7920);
-        expect(LengthUnit.britishConvert(1, "mi", "in")).toBe(63360);
+        expect(LengthUnit.convert(1, "ft", "in")).toBe(12);
+        expect(LengthUnit.convert(1, "yd", "in")).toBe(36);
+        expect(LengthUnit.convert(1, "ftm", "in")).toBe(72);
+        expect(LengthUnit.convert(1, "fur", "in")).toBe(7920);
+        expect(LengthUnit.convert(1, "mi", "in")).toBe(63360);
     });
-
 
     test("Metric to Chinese", function () {
         expect(LengthUnit.convert(1, "pm", "hao").toFixed(8)).toBe("0.00000003");
@@ -66,8 +61,6 @@ describe("Length Unit Convert", function () {
         expect(LengthUnit.convert(1, "m", "li").toFixed(3)).toBe("0.002");
         expect(LengthUnit.convert(1, "km", "gongli").toFixed(0)).toBe("1");
     });
-
-
 
     test("Metric to British", function () {
         expect(LengthUnit.convert(1, "pm", "in").toFixed(12)).toBe("0.000000000039");
@@ -91,7 +84,6 @@ describe("Length Unit Convert", function () {
         expect(Math.round(LengthUnit.convert(1, "gongli", "km"))).toBe(1);
     });
 
-
     test("Chinese to British", function () {
         expect(LengthUnit.convert(1, "hao", "in").toFixed(6)).toBe("0.001312");
         expect(LengthUnit.convert(1, "lii", "ft").toFixed(6)).toBe("0.001094");
@@ -103,7 +95,6 @@ describe("Length Unit Convert", function () {
         expect(LengthUnit.convert(1, "gongli", "mi").toFixed(6)).toBe("0.621371");
     });
 
-
     test("British to Metric", function () {
         expect(LengthUnit.convert(1, "in", "pm")).toBe(25400000000);
         expect(LengthUnit.convert(1, "ft", "nm")).toBe(304800000);
@@ -112,8 +103,6 @@ describe("Length Unit Convert", function () {
         expect(LengthUnit.convert(1, "fur", "cm")).toBe(20116.8);
         expect(LengthUnit.convert(1, "mi", "dm")).toBe(16093.44);
     });
-
-
 
     test("British to Chinese", function () {
         expect(LengthUnit.convert(1, "in", "hao")).toBe(762);
@@ -124,5 +113,20 @@ describe("Length Unit Convert", function () {
         expect(LengthUnit.convert(1, "mi", "zhang")).toBe(482.8032);
     });
 
+
+    it("to Best", () => {
+        expect(new LengthUnit(10, "m").best).toBe("10m");
+        expect(new LengthUnit(1024, "dm").best).toBe("102.4m");
+        expect(new LengthUnit(66, "cun").best).toBe("6.6chi");
+        expect(new LengthUnit(34, "in").best).toBe("2.83ft");
+        expect(new LengthUnit(2.83, "ft").in).toBe(34);
+    });
+
+    it("Unit type Throw", () => {
+        expect(() => new LengthUnit(0, "cm")).not.toThrow();
+        expect(() => new LengthUnit(0, "cun")).not.toThrow();
+        expect(() => new LengthUnit(0, "ft")).not.toThrow();
+        expect(() => new LengthUnit(0, "aa" as any)).toThrow(/unit aa not is support.+/);
+    });
 
 });

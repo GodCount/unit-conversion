@@ -1,18 +1,18 @@
 {
     "compilerOptions": {
         "sourceMap": true,
-        "target": "es2015",
-        "module": "es2015",
+        "target": "ESNext",
+        "module": "ESNext",
         "moduleResolution": "node",
         "noEmitOnError": true,
         "lib": [
-            "es2017",
+            "ESNext",
             "DOM",
         ],
         "strict": true,
         "esModuleInterop": false,
         "allowJs": true,
-        "noImplicitAny": true,
+        "noImplicitAny": false,
     },
     "exclude": [
         "node_modules",

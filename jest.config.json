@@ -1,5 +1,10 @@
 {
     "transform": {
-        "^.+\\.(t|j)sx?$": "esbuild-jest"
+        "^.+\\.(t|j)sx?$": [
+            "esbuild-jest",
+            {
+                "target": "ESNext"
+            }
+        ]
     }
 }

@@ -1,10 +1,11 @@
 
 import typescript from "@rollup/plugin-typescript";
+import resolve from "@rollup/plugin-node-resolve";
 import dts from "rollup-plugin-dts";
 import terser from "@rollup/plugin-terser";
 import fs from "fs-extra";
 
-if(fs.existsSync("./lib")) {
+if (fs.existsSync("./lib")) {
     fs.emptyDirSync("./lib");
 }
 
@@ -42,10 +43,12 @@ const config = [
         ],
         plugins: [
             typescript({
-                tsconfig: './tsconfig.json'
+                tsconfig: './tsconfig.json',
+                sourceMap: isDev
             }),
+            resolve(),
             ...prodPlugins
-        ]
+        ],
     },
     {
         input: "src/index.ts",

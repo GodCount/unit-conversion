@@ -1,4 +1,6 @@
 import ".";
+import { setConvertGlobalConfig } from ".";
+import { getConvertGlobalConfig } from "./config";
 
 describe("prototype tests", function () {
     it("Number.toDuration", function () {
@@ -19,7 +21,6 @@ describe("prototype tests", function () {
         expect((1099511627776).toStorage("kb").pb).toBe(1);
     });
 
-
     it("Number.toLength", function () {
         expect((1).toLength("pm").pm).toBe(1);
         expect((1000).toLength("pm").nm).toBe(1);
@@ -39,16 +40,21 @@ describe("prototype tests", function () {
         expect(Math.round((1500000).toLength("mm").li)).toBe(3);
         expect(Math.round((3000000).toLength("mm").gongli)).toBe(3);
 
-
         expect((25.4).toLength("mm").in).toBe(1);
         expect((304.8).toLength("mm").ft).toBe(1);
         expect((914.4).toLength("mm").yd).toBe(1);
         expect((1828.8).toLength("mm").ftm).toBe(1);
         expect((201168).toLength("mm").fur).toBe(1);
         expect((1609344).toLength("mm").mi).toBe(1);
-
-
-
     });
 
+    it("Convert Config", function () {
+        setConvertGlobalConfig({
+            bestFractionDigits: 6,
+        });
+        expect((100).toLength("in").best).toBe("1.388889ftm");
+        expect((100).toLength("in", { bestFractionDigits: 1 }).best).toBe("1.4ftm");
+        expect((100).toLength("in", { bestCenterSpace: true }).best).toBe("1.388889 ftm");
+        expect((100).toLength("in", { bestUnitUpper: true }).best).toBe("1.388889FTM");
+    });
 });

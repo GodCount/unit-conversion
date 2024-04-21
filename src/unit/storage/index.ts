@@ -1,90 +1,93 @@
-import Unit from "../unit";
+import { ConvertConfig } from "../../config";
+import { Unit, UnitValue } from "../unit";
 
+const StorageUnitTuple = ["bit", "byte", "kb", "mb", "gb", "tb", "pb"] as const;
 
-export declare type StorageUnitType = "bit" | "byte" | "kb" | "mb" | "gb" | "tb" | "pb";
+export type StorageUnitType = (typeof StorageUnitTuple)[number];
 
-
-export class StorageUnit extends Unit<StorageUnitType> {
-
-    static readonly BIT_PER_BYTE = 8;
-    static readonly BIT_PER_KB = StorageUnit.BIT_PER_BYTE * 1024;
-    static readonly BIT_PER_MB = StorageUnit.BIT_PER_KB * 1024;
-    static readonly BIT_PER_GB = StorageUnit.BIT_PER_MB * 1024;
-    static readonly BIT_PER_TB = StorageUnit.BIT_PER_GB * 1024;
-    static readonly BIT_PER_PB = StorageUnit.BIT_PER_TB * 1024;
-
-    static readonly UNIT_TABLE = {
-        "bit": 1,
-        "byte": StorageUnit.BIT_PER_BYTE,
-        "kb": StorageUnit.BIT_PER_KB,
-        "mb": StorageUnit.BIT_PER_MB,
-        "gb": StorageUnit.BIT_PER_GB,
-        "tb": StorageUnit.BIT_PER_TB,
-        "pb": StorageUnit.BIT_PER_PB
-    };
-
-    private minValue: number;
-
-    constructor(rawValue: number, initUnit: StorageUnitType) {
-        super(rawValue, initUnit);
-        this.minValue = StorageUnit.convert(rawValue, initUnit, "bit");
-    }
-
-
-    public static convert(value: number, source: StorageUnitType, target: StorageUnitType) {
-        if (source == target) return value;
-        const bit = value * this.UNIT_TABLE[source];
-        if (isNaN(bit)) throw Error("StorageUnit value cannot be NaN!");
-        return bit / this.UNIT_TABLE[target];
-    }
-
+interface _StorageUnit {
     /**
      * @returns 位
      */
-    get bit() {
-        return this.minValue;
-    }
+    get bit(): UnitValue;
 
     /**
      * @returns 字节
      */
-    get byte() {
-        return StorageUnit.convert(this.minValue, "bit", "byte");
-    }
+    get byte(): UnitValue;
 
     /**
      * @returns 千字节
      */
-    get kb() {
-        return StorageUnit.convert(this.minValue, "bit", "kb");
-    }
+    get kb(): UnitValue;
 
     /**
      * @returns 兆字节
      */
-    get mb() {
-        return StorageUnit.convert(this.minValue, "bit", "mb");
-    }
+    get mb(): UnitValue;
 
     /**
      * @returns 吉字节
      */
-    get gb() {
-        return StorageUnit.convert(this.minValue, "bit", "gb");
-    }
+    get gb(): UnitValue;
 
     /**
      * @returns 太字节
      */
-    get tb() {
-        return StorageUnit.convert(this.minValue, "bit", "tb");
-    }
+    get tb(): UnitValue;
 
     /**
      * @returns 拍字节
      */
-    get pb() {
-        return StorageUnit.convert(this.minValue, "bit", "pb");
+    get pb(): UnitValue;
+}
+
+class _StorageUnit extends Unit<StorageUnitType> {
+    private static readonly UNIT_TABLE = {
+        bit: 0.125,
+        byte: 1,
+        kb: 1024,
+        mb: 1024 * 1024,
+        gb: 1024 * 1024 * 1024,
+        tb: 1024 * 1024 * 1024 * 1024,
+        pb: 1024 * 1024 * 1024 * 1024 * 1024,
+    };
+
+    private readonly UNIT_BEST_TABLE = {
+        bit: 8,
+        byte: 1024,
+        kb: 1024,
+        mb: 1024,
+        gb: 1024,
+        tb: 1024,
+    };
+
+    constructor(rawValue: UnitValue, initUnit: StorageUnitType, config?: Partial<ConvertConfig>) {
+        super(StorageUnitTuple, rawValue, initUnit, config);
+        for (const unit of StorageUnitTuple) {
+            Object.defineProperty(this, unit, {
+                get: () => {
+                    return StorageUnit.convert(this.rawValue, this.initUnit, unit);
+                },
+                enumerable: true,
+                configurable: false,
+            });
+        }
     }
 
+    get best(): string {
+        for (const unit of StorageUnitTuple) {
+            const result = this[unit];
+            const maxValue = this.UNIT_BEST_TABLE[unit];
+            if (!maxValue || result < maxValue) return this.outputBest(result, unit);
+        }
+        return this.outputBest(this.rawValue, this.initUnit);
+    }
+
+    public static convert(value: UnitValue, source: StorageUnitType, target: StorageUnitType) {
+        return this.simpleConvert(value, this.UNIT_TABLE[source], this.UNIT_TABLE[target]);
+    }
 }
+
+export type StorageUnit = _StorageUnit;
+export const StorageUnit = _StorageUnit;

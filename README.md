@@ -1,12 +1,27 @@
 # unit-conversion
 
 - 快捷的单位转换工具,对 Number 原型扩展,实现快速使用
+- 没有精度这东西
 
 ## 日志
 
 - 时间
 - 存储容量
 - 长度（公制、市制、英制）
+- 添加best,返回最佳值（字符串）
+- 添加配置
+```typescript
+{
+    // 单位大写
+    bestUnitUpper: boolean;
+    // 添加空格
+    bestCenterSpace: boolean;
+    // 保留小数位数
+    bestFractionDigits: number;
+}
+```
+
+## 导入
 
 ```bash
 npm install @godcount/unit-conversion
