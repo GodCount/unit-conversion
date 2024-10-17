@@ -25,12 +25,12 @@ const config = [
         input: 'src/index.ts',
         output: [
             {
-                file: './lib/index.cjs.js',
-                format: 'cjs',
+                file: './lib/index.cjs',
+                format: 'commonjs',
                 sourcemap: isDev
             },
             {
-                file: './lib/index.esm.js',
+                file: './lib/index.mjs',
                 format: 'es',
                 sourcemap: isDev
             },

@@ -1,12 +1,15 @@
 {
   "name": "@godcount/unit-conversion",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "通用单位换算工具库",
-  "main": "./lib/index.cjs.js",
-  "module": "./lib/index.esm.js",
-  "browser": "./lib/index.umd.js",
   "type": "module",
+  "main": "./lib/index.cjs",
   "types": "./lib/index.d.ts",
+  "exports": {
+    "import": "./lib/index.mjs",
+    "require": "./lib/index.cjs",
+    "browser": "./lib/index.umd.js"
+  },
   "license": "MIT",
   "author": {
     "name": "GodCount",
@@ -25,14 +28,7 @@
     "lib/*.js",
     "lib/*.d.ts"
   ],
-  "keywords": [
-    "unit-conversion",
-    "length",
-    "duration",
-    "storage"
-  ],
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.5",
     "@types/jest": "^29.5.9",
@@ -45,6 +41,5 @@
     "rollup-plugin-dts": "^6.1.0",
     "tslib": "^2.6.2",
     "typescript": "^5.3.2"
-  },
-  "dependencies": {}
+  }
 }
