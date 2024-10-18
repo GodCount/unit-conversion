@@ -48,13 +48,21 @@ class _DurationUnit extends Unit<DurationUnitType> {
         h: 24,
     };
 
-    constructor(rawValue: UnitValue, initUnit: DurationUnitType, config?: Partial<ConvertConfig>) {
+    constructor(
+        rawValue: UnitValue,
+        initUnit: DurationUnitType,
+        config?: Partial<ConvertConfig>,
+    ) {
         super(DurationUnitTuple, rawValue, initUnit, config);
 
         for (const unit of DurationUnitTuple) {
             Object.defineProperty(this, unit, {
                 get: () => {
-                    return DurationUnit.convert(this.rawValue, this.initUnit, unit);
+                    return DurationUnit.convert(
+                        this.rawValue,
+                        this.initUnit,
+                        unit,
+                    );
                 },
                 enumerable: true,
                 configurable: false,
@@ -65,14 +73,23 @@ class _DurationUnit extends Unit<DurationUnitType> {
     get best(): string {
         for (const unit of DurationUnitTuple) {
             const result = this[unit];
-            const maxValue = this.UNIT_BEST_TABLE[unit];
-            if (!maxValue || result <= maxValue) return this.outputBest(result, unit);
+            const maxValue = this.UNIT_BEST_TABLE[unit as never];
+            if (!maxValue || result <= maxValue)
+                return this.outputBest(result, unit);
         }
         return this.outputBest(this.rawValue, this.initUnit);
     }
 
-    public static convert(value: UnitValue, source: DurationUnitType, target: DurationUnitType) {
-        return this.simpleConvert(value, this.UNIT_TABLE[source], this.UNIT_TABLE[target]);
+    public static convert(
+        value: UnitValue,
+        source: DurationUnitType,
+        target: DurationUnitType,
+    ) {
+        return this.simpleConvert(
+            value,
+            this.UNIT_TABLE[source],
+            this.UNIT_TABLE[target],
+        );
     }
 }
 

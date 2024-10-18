@@ -62,12 +62,20 @@ class _StorageUnit extends Unit<StorageUnitType> {
         tb: 1024,
     };
 
-    constructor(rawValue: UnitValue, initUnit: StorageUnitType, config?: Partial<ConvertConfig>) {
+    constructor(
+        rawValue: UnitValue,
+        initUnit: StorageUnitType,
+        config?: Partial<ConvertConfig>,
+    ) {
         super(StorageUnitTuple, rawValue, initUnit, config);
         for (const unit of StorageUnitTuple) {
             Object.defineProperty(this, unit, {
                 get: () => {
-                    return StorageUnit.convert(this.rawValue, this.initUnit, unit);
+                    return StorageUnit.convert(
+                        this.rawValue,
+                        this.initUnit,
+                        unit,
+                    );
                 },
                 enumerable: true,
                 configurable: false,
@@ -78,14 +86,23 @@ class _StorageUnit extends Unit<StorageUnitType> {
     get best(): string {
         for (const unit of StorageUnitTuple) {
             const result = this[unit];
-            const maxValue = this.UNIT_BEST_TABLE[unit];
-            if (!maxValue || result < maxValue) return this.outputBest(result, unit);
+            const maxValue = this.UNIT_BEST_TABLE[unit as never];
+            if (!maxValue || result < maxValue)
+                return this.outputBest(result, unit);
         }
         return this.outputBest(this.rawValue, this.initUnit);
     }
 
-    public static convert(value: UnitValue, source: StorageUnitType, target: StorageUnitType) {
-        return this.simpleConvert(value, this.UNIT_TABLE[source], this.UNIT_TABLE[target]);
+    public static convert(
+        value: UnitValue,
+        source: StorageUnitType,
+        target: StorageUnitType,
+    ) {
+        return this.simpleConvert(
+            value,
+            this.UNIT_TABLE[source],
+            this.UNIT_TABLE[target],
+        );
     }
 }
 

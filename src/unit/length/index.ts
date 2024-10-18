@@ -1,10 +1,32 @@
 import { ConvertConfig } from "../../config";
 import { Unit, UnitValue } from "../unit";
 
-const MetricLengthUnitTuple = ["pm", "nm", "um", "mm", "cm", "dm", "m", "km"] as const;
-const ChineseLengthUnitTuple = ["hao", "lii", "fen", "cun", "chi", "zhang", "li", "gongli"] as const;
+const MetricLengthUnitTuple = [
+    "pm",
+    "nm",
+    "um",
+    "mm",
+    "cm",
+    "dm",
+    "m",
+    "km",
+] as const;
+const ChineseLengthUnitTuple = [
+    "hao",
+    "lii",
+    "fen",
+    "cun",
+    "chi",
+    "zhang",
+    "li",
+    "gongli",
+] as const;
 const BritishLengthUnitTuple = ["in", "ft", "yd", "ftm", "fur", "mi"] as const;
-const LengthUnitTuple = [...MetricLengthUnitTuple, ...ChineseLengthUnitTuple, ...BritishLengthUnitTuple] as const;
+const LengthUnitTuple = [
+    ...MetricLengthUnitTuple,
+    ...ChineseLengthUnitTuple,
+    ...BritishLengthUnitTuple,
+] as const;
 
 export type MetricLengthUnitType = (typeof MetricLengthUnitTuple)[number];
 
@@ -12,7 +34,10 @@ export type ChineseLengthUnitType = (typeof ChineseLengthUnitTuple)[number];
 
 export type BritishLengthUnitType = (typeof BritishLengthUnitTuple)[number];
 
-export type LengthUnitType = MetricLengthUnitType | ChineseLengthUnitType | BritishLengthUnitType;
+export type LengthUnitType =
+    | MetricLengthUnitType
+    | ChineseLengthUnitType
+    | BritishLengthUnitType;
 
 interface _LengthUnit {
     /**
@@ -193,12 +218,20 @@ class _LengthUnit extends Unit<LengthUnitType> {
         fur: 8,
     };
 
-    constructor(rawValue: UnitValue, initUnit: LengthUnitType, config?: Partial<ConvertConfig>) {
+    constructor(
+        rawValue: UnitValue,
+        initUnit: LengthUnitType,
+        config?: Partial<ConvertConfig>,
+    ) {
         super(LengthUnitTuple, rawValue, initUnit, config);
         for (const unit of LengthUnitTuple) {
             Object.defineProperty(this, unit, {
                 get: () => {
-                    return LengthUnit.convert(this.rawValue, this.initUnit, unit);
+                    return LengthUnit.convert(
+                        this.rawValue,
+                        this.initUnit,
+                        unit,
+                    );
                 },
                 enumerable: true,
                 configurable: false,
@@ -210,19 +243,28 @@ class _LengthUnit extends Unit<LengthUnitType> {
         const unitTuple = ChineseLengthUnitTuple.includes(this.initUnit as any)
             ? ChineseLengthUnitTuple
             : BritishLengthUnitTuple.includes(this.initUnit as any)
-            ? BritishLengthUnitTuple
-            : MetricLengthUnitTuple;
+              ? BritishLengthUnitTuple
+              : MetricLengthUnitTuple;
 
         for (const unit of unitTuple) {
             const result = this[unit];
-            const maxValue = this.UNIT_BEST_TABLE[unit];
-            if (!maxValue || result < maxValue) return this.outputBest(result, unit);
+            const maxValue = this.UNIT_BEST_TABLE[unit as never];
+            if (!maxValue || result < maxValue)
+                return this.outputBest(result, unit);
         }
         return this.outputBest(this.rawValue, this.initUnit);
     }
 
-    public static convert(value: UnitValue, source: LengthUnitType, target: LengthUnitType) {
-        return this.simpleConvert(value, this.UNIT_TABLE[source], this.UNIT_TABLE[target]);
+    public static convert(
+        value: UnitValue,
+        source: LengthUnitType,
+        target: LengthUnitType,
+    ) {
+        return this.simpleConvert(
+            value,
+            this.UNIT_TABLE[source],
+            this.UNIT_TABLE[target],
+        );
     }
 }
 

@@ -25,6 +25,8 @@ describe("Storage Unit", () => {
         expect(() => new StorageUnit(0, "gb")).not.toThrow();
         expect(() => new StorageUnit(0, "tb")).not.toThrow();
         expect(() => new StorageUnit(0, "pb")).not.toThrow();
-        expect(() => new StorageUnit(0, "aa" as any)).toThrow(/unit aa not is support.+/);
+        expect(() => new StorageUnit(0, "aa" as any)).toThrow(
+            /unit aa not is support.+/,
+        );
     });
 });

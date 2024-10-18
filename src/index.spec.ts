@@ -1,6 +1,5 @@
 import ".";
 import { setConvertGlobalConfig } from ".";
-import { getConvertGlobalConfig } from "./config";
 
 describe("prototype tests", function () {
     it("Number.toDuration", function () {
@@ -53,8 +52,14 @@ describe("prototype tests", function () {
             bestFractionDigits: 6,
         });
         expect((100).toLength("in").best).toBe("1.388889ftm");
-        expect((100).toLength("in", { bestFractionDigits: 1 }).best).toBe("1.4ftm");
-        expect((100).toLength("in", { bestCenterSpace: true }).best).toBe("1.388889 ftm");
-        expect((100).toLength("in", { bestUnitUpper: true }).best).toBe("1.388889FTM");
+        expect((100).toLength("in", { bestFractionDigits: 1 }).best).toBe(
+            "1.4ftm",
+        );
+        expect((100).toLength("in", { bestCenterSpace: true }).best).toBe(
+            "1.388889 ftm",
+        );
+        expect((100).toLength("in", { bestUnitUpper: true }).best).toBe(
+            "1.388889FTM",
+        );
     });
 });

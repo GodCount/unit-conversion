@@ -25,8 +25,12 @@ describe("Length Unit Convert", function () {
         expect(LengthUnit.convert(1, "hao", "cun")).toBe(0.001);
         expect(LengthUnit.convert(1, "hao", "chi")).toBe(0.0001);
         expect(LengthUnit.convert(1, "hao", "zhang")).toBe(0.00001);
-        expect(LengthUnit.convert(1, "hao", "li").toFixed(9)).toBe("0.000000067");
-        expect(LengthUnit.convert(1, "hao", "gongli").toFixed(9)).toBe("0.000000033");
+        expect(LengthUnit.convert(1, "hao", "li").toFixed(9)).toBe(
+            "0.000000067",
+        );
+        expect(LengthUnit.convert(1, "hao", "gongli").toFixed(9)).toBe(
+            "0.000000033",
+        );
 
         expect(LengthUnit.convert(1, "lii", "hao")).toBe(10);
         expect(LengthUnit.convert(1, "fen", "hao")).toBe(100);
@@ -52,7 +56,9 @@ describe("Length Unit Convert", function () {
     });
 
     test("Metric to Chinese", function () {
-        expect(LengthUnit.convert(1, "pm", "hao").toFixed(8)).toBe("0.00000003");
+        expect(LengthUnit.convert(1, "pm", "hao").toFixed(8)).toBe(
+            "0.00000003",
+        );
         expect(LengthUnit.convert(1, "nm", "lii").toFixed(6)).toBe("0.000003");
         expect(LengthUnit.convert(1, "um", "fen").toFixed(4)).toBe("0.0003");
         expect(LengthUnit.convert(1, "mm", "cun").toFixed(2)).toBe("0.03");
@@ -63,8 +69,12 @@ describe("Length Unit Convert", function () {
     });
 
     test("Metric to British", function () {
-        expect(LengthUnit.convert(1, "pm", "in").toFixed(12)).toBe("0.000000000039");
-        expect(LengthUnit.convert(1, "nm", "ft").toFixed(10)).toBe("0.0000000033");
+        expect(LengthUnit.convert(1, "pm", "in").toFixed(12)).toBe(
+            "0.000000000039",
+        );
+        expect(LengthUnit.convert(1, "nm", "ft").toFixed(10)).toBe(
+            "0.0000000033",
+        );
         expect(LengthUnit.convert(1, "um", "yd").toFixed(7)).toBe("0.0000011");
         expect(LengthUnit.convert(1, "mm", "ftm").toFixed(7)).toBe("0.0005468");
         expect(LengthUnit.convert(1, "cm", "fur").toFixed(5)).toBe("0.00005");
@@ -74,12 +84,24 @@ describe("Length Unit Convert", function () {
     });
 
     test("Chinese to Metric", function () {
-        expect(LengthUnit.convert(1, "hao", "pm").toFixed(1)).toBe("33333333.3");
-        expect(LengthUnit.convert(1, "lii", "nm").toFixed(3)).toBe("333333.333");
-        expect(LengthUnit.convert(1, "fen", "um").toFixed(5)).toBe("3333.33333");
-        expect(LengthUnit.convert(1, "cun", "mm").toFixed(7)).toBe("33.3333333");
-        expect(LengthUnit.convert(1, "chi", "cm").toFixed(7)).toBe("33.3333333");
-        expect(LengthUnit.convert(1, "zhang", "dm").toFixed(7)).toBe("33.3333333");
+        expect(LengthUnit.convert(1, "hao", "pm").toFixed(1)).toBe(
+            "33333333.3",
+        );
+        expect(LengthUnit.convert(1, "lii", "nm").toFixed(3)).toBe(
+            "333333.333",
+        );
+        expect(LengthUnit.convert(1, "fen", "um").toFixed(5)).toBe(
+            "3333.33333",
+        );
+        expect(LengthUnit.convert(1, "cun", "mm").toFixed(7)).toBe(
+            "33.3333333",
+        );
+        expect(LengthUnit.convert(1, "chi", "cm").toFixed(7)).toBe(
+            "33.3333333",
+        );
+        expect(LengthUnit.convert(1, "zhang", "dm").toFixed(7)).toBe(
+            "33.3333333",
+        );
         expect(Math.round(LengthUnit.convert(1, "li", "m"))).toBe(500);
         expect(Math.round(LengthUnit.convert(1, "gongli", "km"))).toBe(1);
     });
@@ -90,9 +112,13 @@ describe("Length Unit Convert", function () {
         expect(LengthUnit.convert(1, "fen", "yd").toFixed(6)).toBe("0.003645");
         expect(LengthUnit.convert(1, "cun", "ftm").toFixed(6)).toBe("0.018227");
         expect(LengthUnit.convert(1, "chi", "fur").toFixed(6)).toBe("0.001657");
-        expect(LengthUnit.convert(1, "zhang", "mi").toFixed(6)).toBe("0.002071");
+        expect(LengthUnit.convert(1, "zhang", "mi").toFixed(6)).toBe(
+            "0.002071",
+        );
         expect(LengthUnit.convert(1, "li", "mi").toFixed(6)).toBe("0.310686");
-        expect(LengthUnit.convert(1, "gongli", "mi").toFixed(6)).toBe("0.621371");
+        expect(LengthUnit.convert(1, "gongli", "mi").toFixed(6)).toBe(
+            "0.621371",
+        );
     });
 
     test("British to Metric", function () {
@@ -113,7 +139,6 @@ describe("Length Unit Convert", function () {
         expect(LengthUnit.convert(1, "mi", "zhang")).toBe(482.8032);
     });
 
-
     it("to Best", () => {
         expect(new LengthUnit(10, "m").best).toBe("10m");
         expect(new LengthUnit(1024, "dm").best).toBe("102.4m");
@@ -126,7 +151,8 @@ describe("Length Unit Convert", function () {
         expect(() => new LengthUnit(0, "cm")).not.toThrow();
         expect(() => new LengthUnit(0, "cun")).not.toThrow();
         expect(() => new LengthUnit(0, "ft")).not.toThrow();
-        expect(() => new LengthUnit(0, "aa" as any)).toThrow(/unit aa not is support.+/);
+        expect(() => new LengthUnit(0, "aa" as any)).toThrow(
+            /unit aa not is support.+/,
+        );
     });
-
 });

@@ -23,6 +23,8 @@ describe("Duration Unit", () => {
         expect(() => new DurationUnit(0, "min")).not.toThrow();
         expect(() => new DurationUnit(0, "h")).not.toThrow();
         expect(() => new DurationUnit(0, "d")).not.toThrow();
-        expect(() => new DurationUnit(0, "aa" as any)).toThrow(/unit aa not is support.+/);
+        expect(() => new DurationUnit(0, "aa" as any)).toThrow(
+            /unit aa not is support.+/,
+        );
     });
 });
